@@ -1,0 +1,7 @@
+ragas==0.0.21
+langchain==0.0.345
+boto3==1.33.12
+sentence-transformers==2.2.2
+matplotlib==3.8.2
+pandas==2.1.2
+plottable==0.1.5

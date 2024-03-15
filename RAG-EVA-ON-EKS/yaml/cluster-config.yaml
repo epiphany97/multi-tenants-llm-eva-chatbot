@@ -1,0 +1,28 @@
+---
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: multitenant-chatapp
+  region: us-west-2
+  version: "1.27"
+iam:
+  withOIDC: true
+  serviceAccounts:
+  - metadata:
+      name: aws-load-balancer-controller
+      namespace: kube-system
+    wellKnownPolicies:
+      awsLoadBalancerController: true
+availabilityZones: ["us-west-2a", "us-west-2b", "us-west-2c"]
+managedNodeGroups:
+- name: nodegroup
+  desiredCapacity: 3
+  instanceTypes: ["t3a.medium", "t3.medium"]
+  volumeEncrypted: true
+  ssh:
+    allow: false
+cloudWatch:
+  clusterLogging:
+    enableTypes: ["*"]
+secretsEncryption:
+  keyARN: arn:aws:kms:us-west-2:682024804674:key/7eca7791-b988-4063-b61b-4d09766dd380
